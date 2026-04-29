@@ -1,0 +1,18 @@
+
+strategy base_default {
+    use hello.print = posix;
+}
+
+strategy windows_mode : base_default {
+    priority 100;
+    when os.kind == "windows";
+
+    use hello.print = windows;
+}
+
+strategy posix_mode : base_default {
+    priority 90;
+    when os.kind == "posix";
+
+    use hello.print = posix;
+}
