@@ -1,3 +1,6 @@
+
+![Selena introduction image](.github/selena_intro.png)
+
 # Selena
 
 Selena is a tiny profile-based dispatch runtime for C.
