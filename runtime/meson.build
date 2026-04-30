@@ -1,41 +1,32 @@
-
 project(
-  'Selena C function dispatching. Runtime library.',      
+  'selena',
   'c',
-  version: '0.2.0',
-  license: 'GPL 3.0',
+  version: '0.0.1',
   default_options: [
-    'c_std=c11',
-    'warning_level=3',
-    'werror=true',
-    'buildtype=release'
-  ],
-  meson_version: '>= 0.60.0'
+    'c_std=c99',
+    'warning_level=3'
+  ]
 )
 
-cc = meson.get_compiler('c')
+selena_inc = include_directories('include')
 
-inc = include_directories('include')
-
-# config.h
-conf_data = configuration_data()
-conf_data.set('VERSION', meson.project_version())
-conf_data.set('PROJECT_NAME', meson.project_name())
-
-configure_file(
-  output: 'config.h',
-  configuration: conf_data
-)
-
-sources = files(
+selena_lib = static_library(
+  'selena_runtime',
   'src/selena-runtime.c',
-)
-
-# 7. Сборка исполняемого файла
-static_library(
-  'task2',
-  sources,
-  include_directories: inc,
-  # dependencies: [ llibs_dep ],
+  include_directories: selena_inc,
   install: true
 )
+
+selena_dep = declare_dependency(
+  include_directories: selena_inc,
+  link_with: selena_lib
+)
+
+executable(
+  'selena_hello',
+  'examples/hello.c',
+  dependencies: selena_dep,
+  install: false
+)
+
+install_headers('include/selena.h')
