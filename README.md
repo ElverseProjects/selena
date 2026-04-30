@@ -410,13 +410,3 @@ Then run:
 ```bash
 ./hello
 ```
-
-## Minimal philosophy
-
-Selena answers only one question:
-
-> which precompiled implementation should this typed slot point to under the active profile?
-
-Everything else should remain outside the runtime until it proves necessary.
-
-```
